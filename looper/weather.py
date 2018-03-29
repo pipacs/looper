@@ -16,7 +16,6 @@ def get_current_location():
     return j['city']
 
 
-red = ImageColor.getrgb("red")
 white = ImageColor.getrgb("white")
 weather = Weather(Unit.CELSIUS)
 weather_last = ""
@@ -28,8 +27,7 @@ def get_weather():
     global weather_last
     global weather_last_image
     global weather_last_updated
-    global red
-
+ 
     now = datetime.datetime.now()
     delta = now - weather_last_updated
     if delta.total_seconds() < 3600:

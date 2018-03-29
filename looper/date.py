@@ -8,6 +8,5 @@ red = ImageColor.getrgb("red")
 
 
 def get_date():
-    global green
     now = datetime.datetime.now()
     return (now.strftime("%a %-d %b"), red, None)
