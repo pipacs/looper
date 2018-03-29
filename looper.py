@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+# Loop info, like date, weather etc. on the Unicorn Hat HD
+# Copyright (c) Akos Polster. All rights reserved.
 
 import signal
 import time
@@ -13,13 +14,14 @@ try:
     import unicornhathd as unicorn
     unicorn.rotation(90)
 except ImportError:
-    print("Using the Unicorn Hat HD simulator")
+    # Unicorn Hat HD not available or software not installed -- Use simulator
     from unicorn_hat_sim import unicornhathd as unicorn
     hat_sleep_delay = 0.03
 
-from looper.next_date import next_date
-from looper.next_weather import next_weather
-from looper.next_image import next_image
+from looper.time import get_time
+from looper.weather import get_weather
+from looper.panda import get_panda
+from looper.date import get_date
 
 
 def shutdown(code = None, frame = None):
@@ -42,9 +44,10 @@ canvas = Image.new("RGB", (1024, hat_height), black)
 draw = ImageDraw.Draw(canvas)
 
 topics = \
-        [next_weather] * 2 + \
-        [next_image] * 2 + \
-        [next_date] * 5
+        [get_weather] * 2 + \
+        [get_panda] * 1 + \
+        [get_time] * 5 + \
+        [get_date] * 1
 
 
 def blit(image, offset):

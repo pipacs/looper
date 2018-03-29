@@ -2,7 +2,7 @@
 
 _Copyright &copy; Akos Polster. All rights reserved._
 
-Loops info on a Raspberry Pi eqipped with a Unicorn Hat HD:
+Loops info on a Raspberry Pi equipped with a Unicorn Hat HD:
 
 - Current time
 - Current weather
@@ -12,7 +12,7 @@ Loops info on a Raspberry Pi eqipped with a Unicorn Hat HD:
 
 Run ```sudo make``` from this directory.
 
-To run it after system boot, add this line to /etc/rc.local:
+To run Looper when the system boots, add this line to /etc/rc.local:
 
 ```
 (cd /usr/local/lib; nohup python3 looper.py &)

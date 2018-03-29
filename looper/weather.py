@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+# Get current weather at the current location
+# Copyright (c) Akos Polster. All rights reserved.
 
 import datetime
 import json
@@ -23,7 +24,7 @@ weather_last_updated = datetime.datetime.fromtimestamp(0)
 weather_last_image = None
 weather_location_name = get_current_location()
 
-def next_weather():
+def get_weather():
     global weather_last
     global weather_last_image
     global weather_last_updated
@@ -39,7 +40,6 @@ def next_weather():
     try:
         location = weather.lookup_by_location(weather_location_name)
         condition = location.condition()
-        weather_last = condition.text() + " " + condition.temp() + u"\u2103"
         code = int(condition.code())
         if code == 32:
             weather_last_image = Image.open("looper/sunny.png")
@@ -49,6 +49,11 @@ def next_weather():
             weather_last_image = Image.open("looper/cloudy.png")
         else:
             weather_last_image = None
+        weather_last = ""
+        if weather_last_image is None:
+            weather_last = condition.text() + " "
+        weather_last += condition.temp() + u"\u2103"
+
     except Exception:
         traceback.print_exc(file=sys.stdout)
 

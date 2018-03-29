@@ -1,17 +1,14 @@
-#!/usr/bin/env python
+# Get the current time
+# Copyright (c) Akos Polster. All rights reserved.
 
 import datetime
 from PIL import ImageColor
-
-# sudo apt install fonts-roboto
-# sudo pip3 install weather-api
-
 
 red = ImageColor.getrgb("red")
 green = ImageColor.getrgb("green")
 
 
-def next_date():
+def get_time():
     global green
     now = datetime.datetime.now()
     return (now.strftime("%-I:%M"), green, None)
