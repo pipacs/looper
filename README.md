@@ -10,12 +10,12 @@ Loops info on a Raspberry Pi equipped with a Unicorn Hat HD:
 
 # Installation
 
-Run ```sudo make``` from this directory.
+Run ```sudo make``` from this directory. Then run ```looper``` from the command line.
 
 To run Looper when the system boots, add this line to /etc/rc.local:
 
 ```
-(cd /usr/local/lib; nohup python3 looper.py &)
+nohup /usr/local/bin/looper &
 ```
 
 # Dependencies
