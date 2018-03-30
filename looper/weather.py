@@ -10,10 +10,10 @@ import traceback
 from weather import Weather, Unit
 
 def get_current_location():
-    send_url = 'http://freegeoip.net/json'
+    send_url = 'http://gd.geobytes.com/GetCityDetails'
     r = requests.get(send_url)
     j = json.loads(r.text)
-    return j['city']
+    return j["geobytescity"]
 
 
 white = ImageColor.getrgb("white")
