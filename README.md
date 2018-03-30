@@ -2,8 +2,9 @@
 
 _Copyright &copy; Akos Polster. All rights reserved._
 
-Loops info on a Raspberry Pi equipped with a Unicorn Hat HD:
+Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pimoroni.com/products/unicorn-hat-hd):
 
+- Current date
 - Current time
 - Current weather
 - A panda
