@@ -18,19 +18,10 @@ except ImportError:
     from unicorn_hat_sim import unicornhathd as unicorn
     hat_sleep_delay = 0.03
 
-from looper.time import get_time
-from looper.weather import get_weather
-from looper.panda import get_panda
-from looper.date import get_date
-
-
-def shutdown(code = None, frame = None):
-    unicorn.off()
-    sys.exit(0)
-
-signal.signal(signal.SIGTERM, shutdown)
-unicorn.brightness(1.0)
-unicorn.show()
+from looper.time import get_time  # pylint: disable=E0611
+from looper.weather import get_weather  # pylint: disable=E0611
+from looper.panda import get_panda  # pylint: disable=E0611
+from looper.date import get_date  # pylint: disable=E0611
 
 hat_width, hat_height = unicorn.get_shape()
 font_file = "looper/Roboto-Regular.ttf"
@@ -50,6 +41,11 @@ topics = \
         [get_date] * 1
 
 
+def shutdown(code = None, frame = None):
+    unicorn.off()
+    sys.exit(0)
+
+
 def blit(image, offset):
     for x in range(hat_width):
         for y in range(hat_height):
@@ -64,6 +60,10 @@ def next_topic():
 
 
 def main():
+    signal.signal(signal.SIGTERM, shutdown)
+    unicorn.brightness(1.0)
+    unicorn.show()
+
     while True:
         draw.rectangle([0, 0, 1024, hat_height - 1], fill=black)
         text, color, image = next_topic()

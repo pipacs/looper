@@ -2,9 +2,8 @@
 # Copyright (c) Akos Polster. All rights reserved.
 
 import datetime
-from PIL import ImageColor
 
-green = ImageColor.getrgb("green")
+green = (0, 255, 0)
 
 
 def get_time():
