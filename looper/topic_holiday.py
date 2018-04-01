@@ -1,7 +1,10 @@
+# Get today's holiday, if any
+# Copyright (c) Akos Polster. All rights reserved.
+
 import datetime
+import json
 import holidays
 import requests
-import json
 
 
 def get_country_code():
