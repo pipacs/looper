@@ -8,6 +8,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
 - Current time
 - Current weather
 - A panda
+- Current holiday, if any
 
 # Installation
 
@@ -21,7 +22,7 @@ nohup /usr/local/bin/looper &
 
 # Dependencies
 
-1. Install the Unicorn Hat HD dependencies according to https://github.com/pimoroni/unicorn-hat-hd
+1. Install the Unicorn Hat HD software according to https://github.com/pimoroni/unicorn-hat-hd
 
 2. Then install these extra packages:
 
@@ -29,4 +30,5 @@ nohup /usr/local/bin/looper &
 pip3 install weather-api
 pip3 install Pillow
 pip3 install requests
+pip3 install holidays
 ```
