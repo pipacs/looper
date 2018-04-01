@@ -51,7 +51,3 @@ def topic_holiday():
         return (None, None, None)
     holiday = country_holidays[country].get(datetime.datetime.now().date())
     return (holiday, red, None)
-
-
-if __name__ == "__main__":
-    print(country, topic_holiday())

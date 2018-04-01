@@ -29,18 +29,20 @@ hat_width, hat_height = unicorn.get_shape()
 font_file = "looper/Roboto-Regular.ttf"
 font_size = 12
 font = ImageFont.truetype(font_file, font_size)
-
 black = (0, 0, 0)
 white = (255, 255, 255)
 canvas = Image.new("RGB", (1024, hat_height), black)
 draw = ImageDraw.Draw(canvas)
-
-topics = \
-        [topic_weather] * 2 + \
-        [topic_panda] * 1 + \
-        [topic_time] * 5 + \
-        [topic_date] * 1 + \
-        [topic_holiday] * 1
+topics = [
+    topic_time,
+    topic_date,
+    topic_holiday,
+    topic_time,
+    topic_weather,
+    topic_time,
+    topic_panda
+]
+topic_index = 0
 
 
 def shutdown(code=None, frame=None):
@@ -58,12 +60,18 @@ def blit(image, offset):
 
 
 def main():
+    global topic_index
+
     signal.signal(signal.SIGTERM, shutdown)
     unicorn.brightness(1.0)
     unicorn.show()
 
     while True:
-        text, color, image = topics[randint(0, len(topics) - 1)]()
+        text, color, image = topics[topic_index]()
+        topic_index += 1
+        if topic_index >= len(topics):
+            topic_index = 0
+
         if text is None and color is None and image is None:
             continue
 
