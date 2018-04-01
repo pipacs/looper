@@ -21,7 +21,12 @@ nohup /usr/local/bin/looper &
 
 # Dependencies
 
-- Python 3: ```sudo apt-get install python3```
-- Weather: ```sudo pip3 install weather-api```
-- Pillow: ```sudo pip3 install Pillow```
-- Requests: ```sudo pip3 install requests```
+1. Install the Unicorn Hat HD dependencies according to https://github.com/pimoroni/unicorn-hat-hd
+
+2. Then install the following extra packages:
+
+```
+pip3 install weather-api
+pip3 install Pillow
+pip3 install requests
+```
