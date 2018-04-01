@@ -23,6 +23,7 @@ from looper.topic_weather import topic_weather
 from looper.topic_panda import topic_panda
 from looper.topic_date import topic_date
 from looper.topic_holiday import topic_holiday
+from looper.topic_reuters import topic_reuters
 
 
 hat_width, hat_height = unicorn.get_shape()
@@ -40,7 +41,9 @@ topics = [
     topic_time,
     topic_weather,
     topic_time,
-    topic_panda
+    topic_panda,
+    topic_time,
+    topic_reuters
 ]
 topic_index = 0
 
