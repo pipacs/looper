@@ -23,7 +23,7 @@ nohup /usr/local/bin/looper &
 
 1. Install the Unicorn Hat HD dependencies according to https://github.com/pimoroni/unicorn-hat-hd
 
-2. Then install the following extra packages:
+2. Then install these extra packages:
 
 ```
 pip3 install weather-api
