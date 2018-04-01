@@ -5,7 +5,7 @@ import signal
 import time
 import sys
 import traceback
-from PIL import Image, ImageDraw, ImageFont, ImageColor
+from PIL import Image, ImageDraw, ImageFont
 from random import randint
 
 hat_sleep_delay = 0.02
@@ -18,30 +18,32 @@ except ImportError:
     from unicorn_hat_sim import unicornhathd as unicorn
     hat_sleep_delay = 0.03
 
-from looper.time import get_time  # pylint: disable=E0611
-from looper.weather import get_weather  # pylint: disable=E0611
-from looper.panda import get_panda  # pylint: disable=E0611
-from looper.date import get_date  # pylint: disable=E0611
+from looper.topic_time import topic_time
+from looper.topic_weather import topic_weather
+from looper.topic_panda import topic_panda
+from looper.topic_date import topic_date
+from looper.topic_holiday import topic_holiday
+
 
 hat_width, hat_height = unicorn.get_shape()
 font_file = "looper/Roboto-Regular.ttf"
 font_size = 12
 font = ImageFont.truetype(font_file, font_size)
 
-black = ImageColor.getrgb("black")
-red = ImageColor.getrgb("red")
-green = ImageColor.getrgb("green")
+black = (0, 0, 0)
+white = (255, 255, 255)
 canvas = Image.new("RGB", (1024, hat_height), black)
 draw = ImageDraw.Draw(canvas)
 
 topics = \
-        [get_weather] * 2 + \
-        [get_panda] * 1 + \
-        [get_time] * 5 + \
-        [get_date] * 1
+        [topic_weather] * 2 + \
+        [topic_panda] * 1 + \
+        [topic_time] * 5 + \
+        [topic_date] * 1 + \
+        [topic_holiday] * 1
 
 
-def shutdown(code = None, frame = None):
+def shutdown(code=None, frame=None):
     unicorn.off()
     sys.exit(0)
 
@@ -55,25 +57,27 @@ def blit(image, offset):
     unicorn.show()
 
 
-def next_topic():
-    return topics[randint(0, len(topics) - 1)]()
-
-
 def main():
     signal.signal(signal.SIGTERM, shutdown)
     unicorn.brightness(1.0)
     unicorn.show()
 
     while True:
+        text, color, image = topics[randint(0, len(topics) - 1)]()
+        if text is None and color is None and image is None:
+            continue
+
         draw.rectangle([0, 0, 1024, hat_height - 1], fill=black)
-        text, color, image = next_topic()
         topic_width = 0
 
         if image is not None:
             topic_width, _ = image.size
             canvas.paste(image, (hat_width, 0))
 
-        if text is not None and color is not None:
+        if color is None:
+            color = white
+
+        if text is not None:
             if image is not None:
                 text = " " + text
             text_width, _ = font.getsize(text)

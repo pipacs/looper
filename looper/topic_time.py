@@ -6,6 +6,6 @@ import datetime
 green = (0, 255, 0)
 
 
-def get_time():
+def topic_time():
     now = datetime.datetime.now()
     return (now.strftime("%-I:%M"), green, None)

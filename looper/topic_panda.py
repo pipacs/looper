@@ -2,6 +2,6 @@
 
 from PIL import Image
 
-def get_panda():
+def topic_panda():
     image = Image.open("looper/panda.png")
     return (None, None, image)

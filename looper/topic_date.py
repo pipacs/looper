@@ -6,6 +6,6 @@ import datetime
 red = (255, 0, 0)
 
 
-def get_date():
+def topic_date():
     now = datetime.datetime.now()
     return (now.strftime("%a %-d %b"), red, None)
