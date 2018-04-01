@@ -4,7 +4,7 @@ import requests
 import json
 
 
-def get_country():
+def get_country_code():
     send_url = "http://gd.geobytes.com/GetCityDetails"
     r = requests.get(send_url)
     j = json.loads(r.text)
@@ -39,7 +39,7 @@ country_holidays = {
     "FI": holidays.FI(),
     "CH": holidays.CH()
 }
-country = get_country()
+country = get_country_code()
 red = (255, 0, 0)
 
 

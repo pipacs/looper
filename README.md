@@ -4,11 +4,14 @@ _Copyright &copy; Akos Polster. All rights reserved._
 
 Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pimoroni.com/products/unicorn-hat-hd):
 
-- Current date
-- Current time
-- Current weather
-- A panda
-- Current holiday, if any
+* Current date
+* Current time
+* Current weather
+* A panda
+* Current holiday, if any
+
+![alt text](docs/looper.gif "Screen shot")
+
 
 # Installation
 
