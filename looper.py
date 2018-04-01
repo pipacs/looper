@@ -6,7 +6,6 @@ import time
 import sys
 import traceback
 from PIL import Image, ImageDraw, ImageFont
-from random import randint
 
 hat_sleep_delay = 0.02
 
@@ -15,7 +14,7 @@ try:
     unicorn.rotation(90)
 except ImportError:
     # Unicorn Hat HD not available or software not installed -- Use simulator
-    from unicorn_hat_sim import unicornhathd as unicorn
+    from looper.unicorn_hat_sim import unicornhathd as unicorn
     hat_sleep_delay = 0.03
 
 from looper.topic_time import topic_time
@@ -27,9 +26,7 @@ from looper.topic_reuters import topic_reuters
 
 
 hat_width, hat_height = unicorn.get_shape()
-font_file = "looper/Roboto-Regular.ttf"
-font_size = 12
-font = ImageFont.truetype(font_file, font_size)
+font = ImageFont.truetype("looper/Roboto-Regular.ttf", 12)
 black = (0, 0, 0)
 white = (255, 255, 255)
 canvas = Image.new("RGB", (1024, hat_height), black)
@@ -66,7 +63,7 @@ def main():
     global topic_index
 
     signal.signal(signal.SIGTERM, shutdown)
-    unicorn.brightness(1.0)
+    unicorn.brightness(0.75)
     unicorn.show()
 
     while True:
