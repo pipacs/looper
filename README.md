@@ -9,6 +9,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
 * Current weather
 * A panda
 * Current holiday, if any
+* Latest news headlines from Reuters
 
 ![alt text](docs/looper.gif "Screen shot")
 
@@ -34,4 +35,5 @@ pip3 install weather-api
 pip3 install Pillow
 pip3 install requests
 pip3 install holidays
+pip3 install feedparser
 ```
