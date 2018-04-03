@@ -10,6 +10,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
 * A panda
 * Current holiday, if any
 * Latest news headlines from Reuters
+* Phase of the moon
 
 ![alt text](docs/looper.gif "Screen shot")
 
