@@ -1,6 +1,5 @@
 # Copyright (c) Akos Polster. All rights reserved.
 
-import ephem
 import datetime
 from PIL import Image
 
