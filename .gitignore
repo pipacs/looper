@@ -101,4 +101,4 @@ ENV/
 .mypy_cache/
 
 # etc.
-.DS_Store/
+.DS_Store
