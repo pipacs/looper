@@ -5,58 +5,35 @@ import datetime
 from PIL import Image
 
 
-def get_lunation(day=datetime.datetime.now().date()):
-    """
-    Returns a floating-point number from 0-1, that roughly corresponds 
-    to the phase of the moon: 0=new, 0.5=full, 1=new.
-    """
-    
-    date = ephem.Date(day)
-    nnm = ephem.next_new_moon(date)
-    pnm = ephem.previous_new_moon(date)
-    lunation = (date - pnm) / (nnm - pnm)
-    return lunation
-
-
-def get_moon(lunation):
-    moon_map = {
-        0: "moon-5.png",
-        1: "moon-6.png",
-        2: "moon-7.png",
-        3: "moon-8.png",
-        4: "moon-1.png",
-        5: "moon-2.png",
-        6: "moon-3.png",
-        7: "moon-4.png",
-        8: "moon-5.png"
-    }
-    return moon_map.get(int(lunation * 8))
-    
+def get_moon_phase(month, day, year):
+    ages = [18, 0, 11, 22, 3, 14, 25, 6, 17, 28, 9, 20, 1, 12, 23, 4, 15, 26, 7]
+    offsets = [-1, 1, 0, 1, 2, 3, 4, 5, 7, 7, 9, 9]
+    description = [
+        ("moon-5.png", "New moon"),
+        ("moon-6.png", "Waxing crescend"),
+        ("moon-7.png", "First quarter"),
+        ("moon-8.png", "Waxing gibbous"),
+        ("moon-1.png", "Full moon"),
+        ("moon-2.png", "Waning gibbous"),
+        ("moon-3.png", "Third quarter"),
+        ("moon-4.png", "Waning crescent"),
+        ("moon-5.png", "New moon")
+    ]
+    if day == 31:
+        day = 1
+    days_into_phase = ((ages[(year + 1) % 19] +
+                        ((day + offsets[month - 1]) % 30) +
+                        (year < 1900)) % 30)
+    index = int((days_into_phase + 2) * 16 / 59.0)
+    if index > 7:
+        index = 7
+    return description[index]
+     
 
 def topic_moon():
-    moon = get_moon(get_lunation())
+    now = datetime.datetime.now().date()
+    moon, name = get_moon_phase(now.month, now.day, now.year)
     if moon is None:
         return (None, None, None)
     else:
-        return (None, None, Image.open("looper/" + moon))
-
-
-if __name__ == "__main__":
-    today = datetime.datetime.now().date()
-    print(get_moon(get_lunation(today)))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=1))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=3))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=5))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=7))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=9))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=11))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=13))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=15))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=17))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=19))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=21))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=23))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=25))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=27))))
-    print(get_moon(get_lunation(today + datetime.timedelta(days=29))))
-    print(topic_moon())
+        return (name, (255, 255, 255), Image.open("looper/" + moon))
