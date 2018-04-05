@@ -21,7 +21,6 @@ from looper.topic_time import topic_time
 from looper.topic_weather import topic_weather
 from looper.topic_panda import topic_panda
 from looper.topic_date import topic_date
-from looper.topic_holiday import topic_holiday
 from looper.topic_reuters import topic_reuters
 from looper.topic_moon import topic_moon
 
@@ -35,7 +34,6 @@ draw = ImageDraw.Draw(canvas)
 topics = [
     topic_time,
     topic_date,
-    topic_holiday,
     topic_time,
     topic_weather,
     topic_time,
