@@ -3,8 +3,7 @@
 all: \
 	/usr/local/bin/looper \
 	/usr/local/lib/looper \
-	/usr/local/lib/looper.py \
-	/usr/local/lib/unicorn_hat_sim.py
+	/usr/local/lib/looper.py
 
 /usr/local/bin/looper: looper.sh
 	mkdir -p /usr/local/bin
@@ -17,11 +16,6 @@ all: \
 	cp -Rf looper /usr/local/lib
 
 /usr/local/lib/looper.py: looper.py
-	mkdir -p /usr/local/lib
-	cp -f $< $@
-	chmod a+r $@
-
-/usr/local/lib/unicorn_hat_sim.py: unicorn_hat_sim.py
 	mkdir -p /usr/local/lib
 	cp -f $< $@
 	chmod a+r $@
