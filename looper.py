@@ -1,6 +1,7 @@
 # Loop info, like date, weather etc. on the Unicorn Hat HD
 # Copyright (c) Akos Polster. All rights reserved.
 
+import datetime
 import signal
 import time
 import sys
@@ -60,11 +61,18 @@ def blit(image, offset):
     unicorn.show()
 
 
+def set_brightness():
+    now = datetime.datetime.now()
+    if now.hour > 20 or now.hour < 7:
+        unicorn.brightness(0.25)
+    else:
+        unicorn.brightness(0.75)
+
+
 def main():
     global topic_index
 
     signal.signal(signal.SIGTERM, shutdown)
-    unicorn.brightness(0.75)
     unicorn.show()
 
     while True:
@@ -76,6 +84,7 @@ def main():
         if text is None and color is None and image is None:
             continue
 
+        set_brightness()
         draw.rectangle([0, 0, 1024, hat_height - 1], fill=black)
         topic_width = 0
 
