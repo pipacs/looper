@@ -9,7 +9,7 @@ def get_moon_phase(month, day, year):
     offsets = [-1, 1, 0, 1, 2, 3, 4, 5, 7, 7, 9, 9]
     description = [
         ("moon-5.png", "New moon"),
-        ("moon-6.png", "Waxing crescend"),
+        ("moon-6.png", "Waxing crescent"),
         ("moon-7.png", "First quarter"),
         ("moon-8.png", "Waxing gibbous"),
         ("moon-1.png", "Full moon"),
