@@ -40,8 +40,8 @@ topics = [
     topic_time,
     topic_panda,
     topic_time,
-    topic_reuters,
-    topic_time,
+    # topic_reuters,
+    # topic_time,
     topic_moon
 ]
 topic_index = 0
