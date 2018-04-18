@@ -80,7 +80,7 @@ def load_config():
         local_config_file = pathlib.Path.home().joinpath(".looper.yaml")
         with open(local_config_file) as f: 
             local_config = yaml.safe_load(f)
-    except FileNotFoundError:
+    except Exception:
         pass
     config = {**global_config, **local_config}
     topic_map = {
