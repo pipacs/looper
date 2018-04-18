@@ -7,6 +7,8 @@ import time
 import sys
 import traceback
 from PIL import Image, ImageDraw, ImageFont
+import pathlib
+import yaml
 
 hat_sleep_delay = 0.02
 
@@ -32,19 +34,9 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 canvas = Image.new("RGB", (1024, hat_height), black)
 draw = ImageDraw.Draw(canvas)
-topics = [
-    topic_time,
-    topic_date,
-    topic_time,
-    topic_weather,
-    topic_time,
-    topic_panda,
-    topic_time,
-    # topic_reuters,
-    # topic_time,
-    topic_moon
-]
+topics = []
 topic_index = 0
+config = {}
 
 
 def shutdown(code=None, frame=None):
@@ -69,10 +61,47 @@ def set_brightness():
         unicorn.brightness(0.75)
 
 
+def load_config():
+    global config
+    global topics
+
+    local_config = {}
+    global_config = {}
+    try:
+        with open("/usr/local/lib/looper/looper.yaml") as f: 
+            global_config = yaml.safe_load(f)
+    except FileNotFoundError:
+        try:
+            with open("looper/looper.yaml") as f: 
+                global_config = yaml.safe_load(f)
+        except FileNotFoundError:
+            pass
+    try:
+        local_config_file = pathlib.Path.home().joinpath(".looper.yaml")
+        with open(local_config_file) as f: 
+            local_config = yaml.safe_load(f)
+    except FileNotFoundError:
+        pass
+    config = {**global_config, **local_config}
+    topic_map = {
+        "time": topic_time,
+        "date": topic_date,
+        "weather": topic_weather,
+        "reuters": topic_reuters,
+        "panda": topic_panda,
+        "moon": topic_moon,
+    }
+    for topic in config.get("global", {}).get("topics", []):
+        topic_fn = topic_map.get(topic)
+        if topic_fn is not None:
+            topics.append(topic_fn)
+
+
 def main():
     global topic_index
 
     signal.signal(signal.SIGTERM, shutdown)
+    load_config()
     unicorn.show()
 
     while True:
