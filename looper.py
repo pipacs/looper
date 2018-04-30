@@ -56,7 +56,7 @@ def blit(image, offset):
 def set_brightness():
     now = datetime.datetime.now()
     if now.hour > 20 or now.hour < 7:
-        unicorn.brightness(0.25)
+        unicorn.brightness(0.10)
     else:
         unicorn.brightness(0.75)
 
