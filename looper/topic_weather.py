@@ -37,8 +37,8 @@ def topic_weather():
 
     try:
         location = weather.lookup_by_location(weather_location_name)
-        condition = location.condition()
-        code = int(condition.code())
+        condition = location.condition
+        code = int(condition.code)
         if code == 32:
             weather_last_image = Image.open("looper/sunny.png")
         elif code < 12 or code == 35 or code == 40 or code == 47:
@@ -49,8 +49,8 @@ def topic_weather():
             weather_last_image = None
         weather_last = ""
         if weather_last_image is None:
-            weather_last = condition.text() + " "
-        weather_last += condition.temp() + u"\u2103"
+            weather_last = condition.text + " "
+        weather_last += condition.temp + u"\u2103"
 
     except Exception:
         traceback.print_exc(file=sys.stdout)

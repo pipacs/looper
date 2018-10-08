@@ -8,15 +8,15 @@ def get_moon_phase(month, day, year):
     ages = [18, 0, 11, 22, 3, 14, 25, 6, 17, 28, 9, 20, 1, 12, 23, 4, 15, 26, 7]
     offsets = [-1, 1, 0, 1, 2, 3, 4, 5, 7, 7, 9, 9]
     description = [
-        ("moon-5.png", "New moon"),
-        ("moon-6.png", "Waxing crescent"),
-        ("moon-7.png", "First quarter"),
-        ("moon-8.png", "Waxing gibbous"),
-        ("moon-1.png", "Full moon"),
-        ("moon-2.png", "Waning gibbous"),
-        ("moon-3.png", "Third quarter"),
-        ("moon-4.png", "Waning crescent"),
-        ("moon-5.png", "New moon")
+        ("moon-5.png", "New"),
+        ("moon-6.png", "Crescent"),
+        ("moon-7.png", "First Q"),
+        ("moon-8.png", "Gibbous"),
+        ("moon-1.png", "Full"),
+        ("moon-2.png", "Gibbous"),
+        ("moon-3.png", "Third Q"),
+        ("moon-4.png", "Crescent"),
+        ("moon-5.png", "New")
     ]
     if day == 31:
         day = 1
