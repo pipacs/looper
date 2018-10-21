@@ -27,12 +27,12 @@ def get_moon_phase(month, day, year):
     if index > 7:
         index = 7
     return description[index]
-     
+
 
 def topic_moon():
     now = datetime.datetime.now().date()
-    moon, name = get_moon_phase(now.month, now.day, now.year)
+    moon, _ = get_moon_phase(now.month, now.day, now.year)
     if moon is None:
         return (None, None, None)
     else:
-        return (name, (255, 255, 255), Image.open("looper/" + moon))
+        return ("", (255, 255, 255), Image.open("looper/" + moon))

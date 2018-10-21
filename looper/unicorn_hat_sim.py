@@ -7,17 +7,18 @@ try:
 except ImportError:
     print("To simulate a unicorn HAT on your computer, please pip install pygame")
 
+
 class UnicornHatSim(object):
-    def __init__(self, width, height, rotation_offset = 0):
+    def __init__(self, width, height, rotation_offset=0):
         # Compat with old library
         self.AUTO = None
         self.PHAT = None
-            
+
         # Set some defaults
         self.rotation_offset = rotation_offset
         self.rotation(0)
         self.pixels = [(0, 0, 0)] * width * height
-        self.pixel_size = 21
+        self.pixel_size = 15
         self.width = width
         self.height = height
         self.window_width = width * self.pixel_size
@@ -26,7 +27,8 @@ class UnicornHatSim(object):
         # Init pygame and off we go
         pygame.init()
         pygame.display.set_caption("Unicorn HAT simulator")
-        self.screen = pygame.display.set_mode([self.window_width, self.window_height])
+        self.screen = pygame.display.set_mode(
+            [self.window_width, self.window_height])
         self.clear()
 
     def set_pixel(self, x, y, r, g, b):
@@ -34,7 +36,7 @@ class UnicornHatSim(object):
         self.pixels[i] = [int(r), int(g), int(b)]
 
     def draw(self):
-        for event in pygame.event.get(): # User did something
+        for event in pygame.event.get():  # User did something
             if event.type == pygame.QUIT:
                 print("Exiting...")
                 sys.exit()
@@ -49,13 +51,13 @@ class UnicornHatSim(object):
         pygame.display.flip()
 
     def draw_led(self, x, y):
-        self.draw_gfxcircle(x,y)
+        self.draw_gfxcircle(x, y)
 
     def draw_gfxcircle(self, x, y):
         p = self.pixel_size
         w_x = int(x * p + self.pixel_size / 2)
         w_y = int((self.height - 1 - y) * p + self.pixel_size / 2)
-        r = int(self.pixel_size / 2)
+        r = int(self.pixel_size / 4)
         color = self.pixels[self.index(x, y)]
         pygame.gfxdraw.aacircle(self.screen, w_x, w_y, r, color)
         pygame.gfxdraw.filled_circle(self.screen, w_x, w_y, r, color)
@@ -104,8 +106,9 @@ class UnicornHatSim(object):
             yy = self.width - 1 - x
         return (xx * self.width) + yy
 
+
 # SD hats works as expected
-unicornhat = UnicornHatSim(8,8)
+unicornhat = UnicornHatSim(8, 8)
 unicornphat = UnicornHatSim(8, 4)
 
 # Unicornhat HD seems to be the other way around (not that there's anything wrong with that), so we rotate it 180°
