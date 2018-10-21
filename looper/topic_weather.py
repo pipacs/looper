@@ -16,6 +16,24 @@ def get_current_location():
     return j["geobytescity"]
 
 
+def get_weather(location_name):
+    code = 0
+    text = ""
+    temp = 0
+    location = weather.lookup_by_location(location_name)
+    try:
+        condition = location.condition
+        code = int(condition.code)
+        text = condition.text
+        temp = condition.temp
+    except AttributeError:
+        condition = location.condition()
+        code = int(condition.code())
+        text = condition.text()
+        temp = condition.temp()
+    return (code, text, temp)
+
+
 white = ImageColor.getrgb("white")
 weather = Weather(Unit.CELSIUS)
 weather_last = ""
@@ -36,9 +54,7 @@ def topic_weather():
     weather_last_updated = now
 
     try:
-        location = weather.lookup_by_location(weather_location_name)
-        condition = location.condition
-        code = int(condition.code)
+        code, text, temp = get_weather(weather_location_name)
         if code == 32:
             weather_last_image = Image.open("looper/sunny.png")
         elif code < 12 or code == 35 or code == 40 or code == 47:
@@ -49,8 +65,8 @@ def topic_weather():
             weather_last_image = None
         weather_last = ""
         if weather_last_image is None:
-            weather_last = condition.text + " "
-        weather_last += condition.temp + u"\u2103"
+            weather_last = " "
+        weather_last += temp + u"\u2103"
 
     except Exception:
         traceback.print_exc(file=sys.stdout)
