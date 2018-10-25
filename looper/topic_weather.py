@@ -65,7 +65,7 @@ def topic_weather():
             weather_last_image = None
         weather_last = ""
         if weather_last_image is None:
-            weather_last = " "
+            weather_last = text + " "
         weather_last += temp + u"\u2103"
 
     except Exception:
