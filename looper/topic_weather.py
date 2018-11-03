@@ -57,7 +57,7 @@ def topic_weather():
         code, text, temp = get_weather(weather_location_name)
         if code == 32:
             weather_last_image = Image.open("looper/sunny.png")
-        elif code < 12 or code == 35 or code == 40 or code == 47:
+        elif code <= 12 or code == 35 or code == 40 or code == 47:
             weather_last_image = Image.open("looper/rain.png")
         elif code == 26 or code == 27:
             weather_last_image = Image.open("looper/cloudy.png")
