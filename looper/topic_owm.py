@@ -49,8 +49,8 @@ icon_map = {
     "11n": "rain",
     "13d": "snow",
     "13n": "snow",
-    # "50d": "mist",
-    # "50n": "mist",
+    "50d": "mist",
+    "50n": "mist",
 }
 
 def topic_owm(config):
