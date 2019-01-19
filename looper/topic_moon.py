@@ -29,7 +29,7 @@ def get_moon_phase(month, day, year):
     return description[index]
 
 
-def topic_moon():
+def topic_moon(config):
     now = datetime.datetime.now().date()
     moon, _ = get_moon_phase(now.month, now.day, now.year)
     if moon is None:

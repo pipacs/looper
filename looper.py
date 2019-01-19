@@ -78,7 +78,7 @@ def load_config():
         except FileNotFoundError:
             pass
     try:
-        local_config_file = pathlib.Path.home().joinpath(".looper.yaml")
+        local_config_file = str(pathlib.Path.home().joinpath(".looper.yaml"))
         with open(local_config_file) as f: 
             local_config = yaml.safe_load(f)
     except Exception:

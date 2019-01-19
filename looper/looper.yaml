@@ -1,13 +1,13 @@
 global:
   topics:
-    # - time
-    # - date
-    # - time
+    - time
+    - date
+    - time
     - owm
-    # - time
-    # - panda
-    # - time
-    # - moon
+    - time
+    - panda
+    - time
+    - moon
     # - time
     # - reuters
   

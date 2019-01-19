@@ -13,7 +13,6 @@ def get_current_location():
     send_url = 'http://gd.geobytes.com/GetCityDetails'
     r = requests.get(send_url)
     j = json.loads(r.text)
-    print(r.text)
     return (float(j["geobyteslatitude"]), float(j["geobyteslongitude"]))
 
 def get_weather(lat, long, config):
@@ -78,8 +77,6 @@ def topic_owm(config):
         if weather_last_image is None:
             weather_last = text + " "
         weather_last += ("%.1f" % temp) + u"\u2103"
-        print(weather_last, icon_name)
-
     except Exception:
         traceback.print_exc(file=sys.stdout)
 

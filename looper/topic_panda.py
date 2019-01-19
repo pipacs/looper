@@ -5,7 +5,7 @@ from PIL import Image
 
 image_names = ["xmas.png", "panda.png"]
 
-def topic_panda():
+def topic_panda(config):
     image_name = "looper/" + random.SystemRandom().choice(image_names)
     image = Image.open(image_name)
     return (None, None, image)

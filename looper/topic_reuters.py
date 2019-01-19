@@ -9,7 +9,7 @@ reuters_last_updated = datetime.datetime.fromtimestamp(0)
 reuters_entries = []
 
 
-def topic_reuters():
+def topic_reuters(config):
     global reuters_entries
     global reuters_last_updated
 
