@@ -20,7 +20,7 @@ Run ```sudo make``` from this directory. Then run ```looper``` from the command 
 
 To run Looper when the system boots, add this line to /etc/rc.local:
 
-```
+```sh
 nohup /usr/local/bin/looper &
 ```
 
@@ -30,12 +30,21 @@ Configure looper by editing it's configuration file. The system configuration fi
 
 If present, the user configuration file is used, otherwise the system configuration file.
 
+### Configuring OpenWeatherMap
+
+Looper is using OpenWeatherMap to display the current weather. OpenWeatherMap requires an API key that can be requested at [https://openweathermap.org/api](https://openweathermap.org/api). After receiving the key, add it to ```~/.looper.yaml```:
+
+```yaml
+owm:
+    key: "my-api-key"
+```
+
 ## Dependencies
 
 1. Install the Unicorn Hat HD software according to [https://github.com/pimoroni/unicorn-hat-hd](https://github.com/pimoroni/unicorn-hat-hd)
 2. Then install these extra packages:
 
-```
+```sh
 pip3 install weather-api
 pip3 install Pillow
 pip3 install requests
