@@ -26,6 +26,7 @@ from looper.topic_panda import topic_panda
 from looper.topic_date import topic_date
 from looper.topic_reuters import topic_reuters
 from looper.topic_moon import topic_moon
+from looper.topic_owm import topic_owm
 
 
 hat_width, hat_height = unicorn.get_shape()
@@ -90,6 +91,7 @@ def load_config():
         "reuters": topic_reuters,
         "panda": topic_panda,
         "moon": topic_moon,
+        "owm": topic_owm,
     }
     for topic in config.get("global", {}).get("topics", []):
         topic_fn = topic_map.get(topic)
@@ -105,7 +107,7 @@ def main():
     unicorn.show()
 
     while True:
-        text, color, image = topics[topic_index]()
+        text, color, image = topics[topic_index](config)
         topic_index += 1
         if topic_index >= len(topics):
             topic_index = 0

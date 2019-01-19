@@ -51,7 +51,7 @@ def get_holiday():
     return country_holidays[country].get(datetime.datetime.now().date())
 
 
-def topic_date():
+def topic_date(config):
     now = datetime.datetime.now()
     date = now.strftime("%a %-d %b")
     holiday = get_holiday()

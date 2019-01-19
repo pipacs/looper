@@ -41,7 +41,7 @@ weather_last_updated = datetime.datetime.fromtimestamp(0)
 weather_last_image = None
 weather_location_name = get_current_location()
 
-def topic_weather():
+def topic_weather(config):
     global weather_last
     global weather_last_image
     global weather_last_updated
