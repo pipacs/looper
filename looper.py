@@ -21,7 +21,6 @@ except ImportError:
     hat_sleep_delay = 0.03
 
 from looper.topic_time import topic_time
-from looper.topic_weather import topic_weather
 from looper.topic_panda import topic_panda
 from looper.topic_date import topic_date
 from looper.topic_reuters import topic_reuters
@@ -87,7 +86,6 @@ def load_config():
     topic_map = {
         "time": topic_time,
         "date": topic_date,
-        "weather": topic_weather,
         "reuters": topic_reuters,
         "panda": topic_panda,
         "moon": topic_moon,
