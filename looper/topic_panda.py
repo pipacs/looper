@@ -3,7 +3,7 @@
 import random
 from PIL import Image
 
-image_names = ["xmas.png", "panda.png"]
+image_names = ["easter.png", "panda.png"]
 
 def topic_panda(config):
     image_name = "looper/" + random.SystemRandom().choice(image_names)
