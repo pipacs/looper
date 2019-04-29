@@ -9,11 +9,28 @@ import sys
 import traceback
 import pyowm
 
+location_last = (0.0, 0.0)
+location_last_updated = datetime.datetime.fromtimestamp(0)
+
 def get_current_location():
-    send_url = 'http://gd.geobytes.com/GetCityDetails'
-    r = requests.get(send_url)
-    j = json.loads(r.text)
-    return (float(j["geobyteslatitude"]), float(j["geobyteslongitude"]))
+    global location_last
+    global location_last_updated
+
+    now = datetime.datetime.now()
+    delta = now - location_last_updated
+    if delta.total_seconds() < 86400:
+        return location_last
+
+    try:
+        send_url = 'http://gd.geobytes.com/GetCityDetails'
+        r = requests.get(send_url)
+        j = json.loads(r.text)
+        location_last = (float(j["geobyteslatitude"]), float(j["geobyteslongitude"]))
+        location_last_updated = now
+    except Exception:
+        traceback.print_exc(file=sys.stdout)
+
+    return location_last
 
 def get_weather(lat, long, config):
     api_key = config.get("owm", {}).get("key", "")
