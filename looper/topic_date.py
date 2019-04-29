@@ -59,9 +59,9 @@ country_holidays = {
     "FI": holidays.FI(),
     "CH": holidays.CH()
 }
-country = get_country_code()
 
 def get_holiday():
+    country = get_country_code()
     if not country in country_holidays.keys():
         return None
     return country_holidays[country].get(datetime.datetime.now().date())

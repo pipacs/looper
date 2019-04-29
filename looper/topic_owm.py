@@ -76,8 +76,6 @@ def topic_owm(config):
     if delta.total_seconds() < 3600:
         return (weather_last, white, weather_last_image)
 
-    weather_last_updated = now
-
     try:
         lat, long = get_current_location()
         icon_name, text, temp = get_weather(lat, long, config)
@@ -90,6 +88,7 @@ def topic_owm(config):
         if weather_last_image is None:
             weather_last = text + " "
         weather_last += ("%.0f" % temp) + u"\u2103"
+        weather_last_updated = now
     except Exception:
         traceback.print_exc(file=sys.stdout)
 
