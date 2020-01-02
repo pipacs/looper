@@ -21,13 +21,20 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
 1. Install the Unicorn Hat HD software according to [https://github.com/pimoroni/unicorn-hat-hd](https://github.com/pimoroni/unicorn-hat-hd)
 2. Then install these extra packages:
 
+    ```sh
+    pip3 install Pillow
+    pip3 install requests
+    pip3 install holidays
+    pip3 install feedparser
+    pip3 install PyYAML
+    pip3 install pyowm
+    pip3 install pygame
+    ```
+
+Note: In order to test Looper on MacOS Mojave or later, you need PyGame 2.0.0:
+
 ```sh
-pip3 install Pillow
-pip3 install requests
-pip3 install holidays
-pip3 install feedparser
-pip3 install PyYAML
-pip3 install pyowm
+pip3 install pygame=2.0.0.dev6
 ```
 
 ### Installing Looper
