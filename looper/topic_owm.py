@@ -7,7 +7,7 @@ from PIL import Image, ImageColor
 import requests
 import sys
 import traceback
-import pyowm
+from pyowm.owm import OWM
 
 location_last = (55.667, 12.583)
 location_last_updated = datetime.datetime.fromtimestamp(0)
@@ -32,12 +32,13 @@ def get_weather(lat, long, config):
     api_key = config.get("owm", {}).get("key", "")
     if api_key == "":
         return ("", "Missing OWM API key", 0)
-    owm = pyowm.OWM(api_key)
-    observation = owm.weather_at_coords(lat, long)
-    w = observation.get_weather()
-    icon_name = w.get_weather_icon_name()
-    status = w.get_status()
-    temp = w.get_temperature("celsius")["temp"]
+    owm = OWM(api_key)
+    weather_manager = owm.weather_manager()
+    observation = weather_manager.weather_at_coords(lat, long)
+    w = observation.weather
+    icon_name = w.weather_icon_name
+    status = w.status
+    temp = w.temperature("celsius")["temp"]
     return (icon_name, status, temp)
 
 weather_last = ""
