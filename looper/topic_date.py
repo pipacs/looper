@@ -1,33 +1,30 @@
 # Get the current date and today's holiday
 # Copyright (c) Akos Polster. All rights reserved.
 
-import datetime
+from datetime import datetime
 import holidays
 import json
 import requests
 import sys
 import traceback
+import urllib
+from ip2geotools.databases.noncommercial import DbIpCity
 
-country_last = ""
-country_last_updated = datetime.datetime.fromtimestamp(0)
+country_last = "US"
+country_last_updated = datetime.fromtimestamp(0)
 
 def get_country_code():
     global country_last
     global country_last_updated
 
-    now = datetime.datetime.now()
+    now = datetime.now()
     delta = now - country_last_updated
     if delta.total_seconds() < 86400:
         return country_last
 
-    try:
-        send_url = "http://gd.geobytes.com/GetCityDetails"
-        r = requests.get(send_url)
-        j = json.loads(r.text)
-        country_last = j["geobytesinternet"]
-        country_last_updated = now
-    except Exception:
-         traceback.print_exc(file=sys.stdout)
+    myIp = urllib.request.urlopen('http://icanhazip.com/').read().strip()  
+    response = DbIpCity.get(myIp, api_key='free')
+    country_last = response.country
        
     return country_last
 
@@ -64,10 +61,10 @@ def get_holiday():
     country = get_country_code()
     if not country in country_holidays.keys():
         return None
-    return country_holidays[country].get(datetime.datetime.now().date())
+    return country_holidays[country].get(datetime.now().date())
 
 def topic_date(config):
-    now = datetime.datetime.now()
+    now = datetime.now()
     date = now.strftime("%a %-d %b")
     holiday = get_holiday()
     if holiday is not None:

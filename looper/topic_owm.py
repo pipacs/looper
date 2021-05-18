@@ -8,6 +8,8 @@ import requests
 import sys
 import traceback
 from pyowm.owm import OWM
+from ip2geotools.databases.noncommercial import DbIpCity
+import urllib
 
 location_last = (55.667, 12.583)
 location_last_updated = datetime.datetime.fromtimestamp(0)
@@ -21,10 +23,9 @@ def get_current_location():
     if delta.total_seconds() < 86400:
         return location_last
 
-    send_url = 'http://gd.geobytes.com/GetCityDetails'
-    r = requests.get(send_url)
-    j = json.loads(r.text)
-    location_last = (float(j["geobyteslatitude"]), float(j["geobyteslongitude"]))
+    myIp = urllib.request.urlopen('http://icanhazip.com/').read().strip()  
+    response = DbIpCity.get(myIp, api_key='free')
+    location_last = (response.latitude, response.longitude)
     location_last_updated = now
     return location_last
 

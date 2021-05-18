@@ -29,13 +29,8 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
     pip3 install PyYAML
     pip3 install pyowm
     pip3 install pygame
+    pip3 install ip2geotools
     ```
-
-Note: In order to test Looper on MacOS Mojave or later, you need PyGame 2.0.0:
-
-```sh
-pip3 install pygame=2.0.0.dev6
-```
 
 ### Installing Looper
 
@@ -61,3 +56,21 @@ Looper is using OpenWeatherMap to display the current weather. OpenWeatherMap re
 owm:
     key: "my-api-key"
 ```
+
+## Developing on the Mac
+
+* Install Homebrew
+
+* Install the rest of the dependencies:
+  ```
+  brew install python3
+  brew install sdl2
+  pip3 install Pillow
+  pip3 install requests
+  pip3 install holidays
+  pip3 install feedparser
+  pip3 install PyYAML
+  pip3 install pyowm
+  pip3 install pygame==2.0.0.dev6
+  pip3 install ip2geotools
+  ```
