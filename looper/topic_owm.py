@@ -23,11 +23,14 @@ def get_current_location():
     if delta.total_seconds() < 86400:
         return location_last
 
-    myIp = urllib.request.urlopen('http://icanhazip.com/').read().strip()  
-    response = DbIpCity.get(myIp, api_key='free')
-    location_last = (response.latitude, response.longitude)
-    location_last_updated = now
-    return location_last
+    try:
+        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=5).read().strip()  
+        response = DbIpCity.get(myIp, api_key='free')
+        location_last = (response.latitude, response.longitude)
+        location_last_updated = now
+        return location_last
+    except:
+        return location_last
 
 def get_weather(lat, long, config):
     api_key = config.get("owm", {}).get("key", "")

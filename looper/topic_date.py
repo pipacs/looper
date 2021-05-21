@@ -22,10 +22,13 @@ def get_country_code():
     if delta.total_seconds() < 86400:
         return country_last
 
-    myIp = urllib.request.urlopen('http://icanhazip.com/').read().strip()  
-    response = DbIpCity.get(myIp, api_key='free')
-    country_last = response.country
-       
+    try:
+        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=5).read().strip()  
+        response = DbIpCity.get(myIp, api_key='free')
+        country_last = response.country
+    except:
+        pass
+    
     return country_last
 
 country_holidays = {
