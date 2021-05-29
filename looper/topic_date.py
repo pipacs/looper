@@ -9,13 +9,17 @@ import sys
 import traceback
 import urllib
 from ip2geotools.databases.noncommercial import DbIpCity
+import shelve
 
-country_last = "US"
-country_last_updated = datetime.fromtimestamp(0)
+settings = shelve.open("looper", writeback=True)
 
 def get_country_code():
-    global country_last
-    global country_last_updated
+    country_last = "US"
+    if "country_last" in settings:
+        country_last = settings["country_last"]
+    country_last_updated = datetime.fromtimestamp(0)
+    if "country_last_updated" in settings:
+        country_last_updated = settings["country_last_updated"]
 
     now = datetime.now()
     delta = now - country_last_updated
@@ -23,12 +27,14 @@ def get_country_code():
         return country_last
 
     try:
-        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=5).read().strip()  
+        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=2).read().strip()
         response = DbIpCity.get(myIp, api_key='free')
         country_last = response.country
     except:
         pass
-    
+  
+    settings["country_last_updated"] = now
+    settings["country_last"] = country_last
     return country_last
 
 country_holidays = {
