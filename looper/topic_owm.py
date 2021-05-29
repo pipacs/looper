@@ -10,9 +10,9 @@ import traceback
 from pyowm.owm import OWM
 from ip2geotools.databases.noncommercial import DbIpCity
 import urllib
-import shelve
 
-settings = shelve.open("looper", writeback=True)
+from chest import Chest
+settings = Chest()
 
 
 def get_current_location():
@@ -29,11 +29,12 @@ def get_current_location():
         return location_last
 
     try:
-        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=5).read().strip()  
+        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=5).read().strip()
         response = DbIpCity.get(myIp, api_key='free')
         location_last = (response.latitude, response.longitude)
         settings["location_last"] = location_last
         settings["location_last_updated"] = now
+        settings.flush
         return location_last
     except:
         return location_last
@@ -81,7 +82,7 @@ def topic_owm(config):
     global weather_last
     global weather_last_image
     global weather_last_updated
- 
+
     now = datetime.datetime.now()
     delta = now - weather_last_updated
     if delta.total_seconds() < 3600:

@@ -9,9 +9,9 @@ import sys
 import traceback
 import urllib
 from ip2geotools.databases.noncommercial import DbIpCity
-import shelve
+from chest import Chest
 
-settings = shelve.open("looper", writeback=True)
+settings = Chest()
 
 def get_country_code():
     country_last = "US"
@@ -32,9 +32,10 @@ def get_country_code():
         country_last = response.country
     except:
         pass
-  
+
     settings["country_last_updated"] = now
     settings["country_last"] = country_last
+    settings.flush()
     return country_last
 
 country_holidays = {
