@@ -8,36 +8,9 @@ import requests
 import sys
 import traceback
 from pyowm.owm import OWM
-from ip2geotools.databases.noncommercial import DbIpCity
-import urllib
 
-from chest import Chest
-settings = Chest()
+from looper.tools import get_current_location
 
-
-def get_current_location():
-    location_last = (55.667, 12.583)
-    if "location_last" in settings:
-        location_last = settings["location_last"]
-    location_last_updated = datetime.datetime.fromtimestamp(0)
-    if "location_last_updated" in settings:
-        location_last_updated = settings["location_last_updated"]
-
-    now = datetime.datetime.now()
-    delta = now - location_last_updated
-    if delta.total_seconds() < 86400:
-        return location_last
-
-    try:
-        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=5).read().strip()
-        response = DbIpCity.get(myIp, api_key='free')
-        location_last = (response.latitude, response.longitude)
-        settings["location_last"] = location_last
-        settings["location_last_updated"] = now
-        settings.flush
-        return location_last
-    except:
-        return location_last
 
 def get_weather(lat, long, config):
     api_key = config.get("owm", {}).get("key", "")
@@ -51,6 +24,7 @@ def get_weather(lat, long, config):
     status = w.status
     temp = w.temperature("celsius")["temp"]
     return (icon_name, status, temp)
+
 
 weather_last = ""
 weather_last_updated = datetime.datetime.fromtimestamp(0)
@@ -77,6 +51,7 @@ icon_map = {
     "50d": "mist",
     "50n": "mist",
 }
+
 
 def topic_owm(config):
     global weather_last
