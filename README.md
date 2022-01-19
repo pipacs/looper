@@ -31,6 +31,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
     pip3 install pygame
     pip3 install ip2geotools
     pip3 install chest
+    pip3 install suntime
     ```
 
 ### Installing Looper
