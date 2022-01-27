@@ -28,7 +28,8 @@ def get_current_location():
         location_last = (response.latitude, response.longitude)
         settings["location_last"] = location_last
         settings["location_last_updated"] = now
-        settings.flush
-        return location_last
+        settings.flush()
     except:
-        return location_last
+        pass
+
+    return location_last
