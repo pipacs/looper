@@ -7,7 +7,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
 * Current date
 * Current time
 * Current weather
-* A panda
+* A panda or a chicken
 * Current holiday, if any
 * Latest news headlines from Reuters
 * Phase of the moon
@@ -32,6 +32,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
     pip3 install ip2geotools
     pip3 install chest
     pip3 install astral
+    pip3 install tzlocal
     ```
 
 ### Installing Looper
@@ -77,4 +78,5 @@ owm:
   pip3 install ip2geotools
   pip3 install chest
   pip3 install astral
+  pip3 install tzlocal
   ```

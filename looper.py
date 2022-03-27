@@ -10,6 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 import pathlib
 import yaml
 from astral import sun, LocationInfo
+from tzlocal import get_localzone_name
 
 hat_sleep_delay = 0.02
 
@@ -61,9 +62,8 @@ def set_brightness():
     """Set the Unicorn hat's brightness according to the current sunrise/sunset time"""
     now = datetime.datetime.now()
     latitude, longitude = get_current_location()
-    timezone = datetime.datetime.now(datetime.timezone.utc).astimezone().tzname()
     loc = LocationInfo(latitude=latitude, longitude=longitude)
-    sunInfo = sun.sun(loc.observer, date=now.date(), tzinfo=timezone)
+    sunInfo = sun.sun(loc.observer, date=now.date(), tzinfo=get_localzone_name())
     utcNow = datetime.datetime.now(datetime.timezone.utc)
     if utcNow < sunInfo["sunrise"] or utcNow > sunInfo["sunset"]:
         unicorn.brightness(0.10)
