@@ -9,9 +9,8 @@ import sys
 import traceback
 import urllib
 from ip2geotools.databases.noncommercial import DbIpCity
-from chest import Chest
 
-settings = Chest()
+settings = {}
 
 def get_country_code():
     country_last = "US"
@@ -35,7 +34,6 @@ def get_country_code():
 
     settings["country_last_updated"] = now
     settings["country_last"] = country_last
-    settings.flush()
     return country_last
 
 country_holidays = {

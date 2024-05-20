@@ -5,8 +5,7 @@ from ip2geotools.databases.noncommercial import DbIpCity
 import urllib
 import datetime
 
-from chest import Chest
-settings = Chest()
+settings = {}
 
 
 def get_current_location():
@@ -28,7 +27,6 @@ def get_current_location():
         location_last = (response.latitude, response.longitude)
         settings["location_last"] = location_last
         settings["location_last_updated"] = now
-        settings.flush()
     except:
         pass
 

@@ -22,7 +22,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
 2. Then install these extra packages:
 
     ```sh
-    pip3 install Pillow
+    pip3 install "Pillow<=9.5.0"
     pip3 install requests
     pip3 install holidays
     pip3 install feedparser
@@ -30,7 +30,6 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
     pip3 install pyowm
     pip3 install pygame
     pip3 install ip2geotools
-    pip3 install chest
     pip3 install astral
     pip3 install tzlocal
     ```
@@ -62,21 +61,8 @@ owm:
 
 ## Developing on the Mac
 
-* Install Homebrew
+Run the test setup:
 
-* Install the rest of the dependencies:
-  ```
-  brew install python3
-  brew install sdl2
-  pip3 install Pillow
-  pip3 install requests
-  pip3 install holidays
-  pip3 install feedparser
-  pip3 install PyYAML
-  pip3 install pyowm
-  pip3 install pygame==2.0.0.dev6
-  pip3 install ip2geotools
-  pip3 install chest
-  pip3 install astral
-  pip3 install tzlocal
-  ```
+```sh
+make test-mac
+```

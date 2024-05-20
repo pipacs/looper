@@ -20,4 +20,12 @@ all: \
 	cp -f $< $@
 	chmod a+r $@
 
+test-mac:
+	mkdir -p ~/lib
+	python3 -m venv ~/lib/looper.venv
+	source ~/lib/looper.venv/bin/activate; \
+		pip3 -q install 'Pillow<=9.5.0' requests holidays feedparser PyYAML \
+			pyowm pygame ip2geotools astral tzlocal; \
+		python3 looper.py
+
 .PHONY: /usr/local/lib/looper
