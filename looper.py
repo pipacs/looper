@@ -62,14 +62,16 @@ def set_brightness():
     """Set the Unicorn hat's brightness according to the current sunrise/sunset time"""
     now = datetime.datetime.now()
     latitude, longitude = get_current_location()
-    loc = LocationInfo(latitude=latitude, longitude=longitude)
-    sunInfo = sun.sun(loc.observer, date=now.date(), tzinfo=get_localzone_name())
-    utcNow = datetime.datetime.now(datetime.timezone.utc)
-    if utcNow < sunInfo["sunrise"] or utcNow > sunInfo["sunset"]:
-        unicorn.brightness(0.10)
-    else:
-        unicorn.brightness(0.75)
-
+    try:
+        loc = LocationInfo(latitude=latitude, longitude=longitude)
+        sunInfo = sun.sun(loc.observer, date=now.date(), tzinfo=get_localzone_name())
+        utcNow = datetime.datetime.now(datetime.timezone.utc)
+        if utcNow < sunInfo["sunrise"] or utcNow > sunInfo["sunset"]:
+            unicorn.brightness(0.10)
+        else:
+            unicorn.brightness(0.75)
+    except:
+        pass
 
 def load_config():
     global config
