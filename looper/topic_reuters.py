@@ -16,7 +16,7 @@ def topic_reuters(config):
     now = datetime.datetime.now()
     delta = now - reuters_last_updated
     if delta.total_seconds() > 1800:
-        reuters_entries = feedparser.parse("http://feeds.reuters.com/reuters/topNews").entries
+        reuters_entries = feedparser.parse("https://cdn.feedcontrol.net/8/1114-wioSIX3uu8MEj.xml").entries
         reuters_last_updated = now
 
     count = len(reuters_entries)
