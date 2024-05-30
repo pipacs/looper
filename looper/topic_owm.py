@@ -2,9 +2,7 @@
 # Copyright (c) Akos Polster. All rights reserved.
 
 import datetime
-import json
 from PIL import Image, ImageColor
-import requests
 import sys
 import traceback
 from pyowm.owm import OWM
@@ -13,9 +11,15 @@ from looper.tools import get_current_location
 
 
 def get_weather(lat, long, config):
+    now = datetime.datetime.now()
+    delta = now - weather_last_updated
+    if delta.total_seconds() < 3600:
+        return weather_last
+
     api_key = config.get("owm", {}).get("key", "")
     if api_key == "":
         return ("", "Missing OWM API key", 0)
+
     owm = OWM(api_key)
     weather_manager = owm.weather_manager()
     observation = weather_manager.weather_at_coords(lat, long)
@@ -23,7 +27,9 @@ def get_weather(lat, long, config):
     icon_name = w.weather_icon_name
     status = w.status
     temp = w.temperature("celsius")["temp"]
-    return (icon_name, status, temp)
+    result = (icon_name, status, temp)
+    print(result)
+    return result
 
 
 weather_last = ""
@@ -33,7 +39,7 @@ weather_last_image = None
 white = ImageColor.getrgb("white")
 icon_map = {
     "01d": "sunny",
-    # "01n": "starry",
+    "01n": "starry",
     "03d": "cloudy",
     "03n": "cloudy",
     "04d": "cloudy",
@@ -70,6 +76,7 @@ def topic_owm(config):
         if baseName is not None:
             weather_last_image = Image.open("looper/" + baseName + ".png")
         else:
+            print("No weather icon for", icon_name)
             weather_last_image = None
         weather_last = ""
         if weather_last_image is None:
