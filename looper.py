@@ -33,7 +33,7 @@ from looper.tools import get_current_location
 
 
 hat_width, hat_height = unicorn.get_shape()
-font = ImageFont.truetype("looper/Roboto-Regular.ttf", 12)
+font = ImageFont.truetype("looper/RobotoCondensed-Medium.ttf", 13)
 black = (0, 0, 0)
 white = (255, 255, 255)
 canvas = Image.new("RGB", (1024, hat_height), black)
