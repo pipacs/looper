@@ -23,7 +23,7 @@ all: \
 test-mac:
 	python3 -m venv venv
 	source venv/bin/activate; \
-		pip3 -q install 'Pillow<=9.5.0' requests holidays feedparser PyYAML \
+		pip3 -q install Pillow requests holidays feedparser PyYAML \
 			pyowm pygame ip2geotools astral tzlocal; \
 		python3 looper.py
 

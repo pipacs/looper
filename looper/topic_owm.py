@@ -86,4 +86,7 @@ def topic_owm(config):
     except Exception:
         traceback.print_exc(file=sys.stdout)
 
+    print("Last weather:", weather_last)
+    print("Last updated:", weather_last_updated)
+
     return (weather_last, white, weather_last_image)

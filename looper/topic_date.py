@@ -3,14 +3,14 @@
 
 from datetime import datetime
 import holidays
-import json
-import requests
 import sys
 import traceback
 import urllib
 from ip2geotools.databases.noncommercial import DbIpCity
 
+
 settings = {}
+
 
 def get_country_code():
     country_last = "US"
@@ -30,11 +30,12 @@ def get_country_code():
         response = DbIpCity.get(myIp, api_key='free')
         country_last = response.country
     except:
-        pass
+        traceback.print_exc(file=sys.stdout)
 
     settings["country_last_updated"] = now
     settings["country_last"] = country_last
     return country_last
+
 
 country_holidays = {
     "CA": holidays.CA(),

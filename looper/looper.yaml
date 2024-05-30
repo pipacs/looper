@@ -8,6 +8,5 @@ global:
     - panda
     - time
     - moon
-    # - time
-    # - reuters
-  
+    - time
+    - reuters

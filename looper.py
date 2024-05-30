@@ -73,6 +73,7 @@ def set_brightness():
     except:
         pass
 
+
 def load_config():
     global config
     global topics
@@ -139,7 +140,7 @@ def main():
         if text is not None:
             if image is not None:
                 text = " " + text
-            text_width, _ = font.getsize(text)
+            text_width = int(font.getlength(text))
             draw.text((hat_width + topic_width, 0), text, color, font=font)
             topic_width += text_width
 

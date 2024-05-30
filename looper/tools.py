@@ -4,6 +4,9 @@
 from ip2geotools.databases.noncommercial import DbIpCity
 import urllib
 import datetime
+import sys
+import traceback
+
 
 settings = {}
 
@@ -29,6 +32,6 @@ def get_current_location():
         settings["location_last"] = location_last
         settings["location_last_updated"] = now
     except:
-        pass
+        traceback.print_exc(file=sys.stdout)
 
     return location_last

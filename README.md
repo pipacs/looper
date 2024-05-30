@@ -22,7 +22,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
 2. Then install these extra packages:
 
     ```sh
-    pip3 install "Pillow<=9.5.0"
+    pip3 install Pillow
     pip3 install requests
     pip3 install holidays
     pip3 install feedparser
