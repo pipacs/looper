@@ -140,7 +140,10 @@ def main():
         if text is not None:
             if image is not None:
                 text = " " + text
-            text_width = int(font.getlength(text))
+            try:
+                text_width = int(font.getlength(text))
+            except AttributeError:
+                text_width, _ = font.getsize(text)
             draw.text((hat_width + topic_width, 0), text, color, font=font)
             topic_width += text_width
 
