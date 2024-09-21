@@ -22,6 +22,7 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
 2. Then install these extra packages:
 
     ```sh
+    pip3 install setuptools
     pip3 install Pillow
     pip3 install requests
     pip3 install holidays
@@ -29,7 +30,6 @@ Loops info on a Raspberry Pi equipped with the [Unicorn Hat HD](https://shop.pim
     pip3 install PyYAML
     pip3 install pyowm
     pip3 install pygame
-    pip3 install ip2geotools
     pip3 install astral
     pip3 install tzlocal
     ```

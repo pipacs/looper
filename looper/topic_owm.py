@@ -81,7 +81,7 @@ def topic_owm(config):
         weather_last = ""
         if weather_last_image is None:
             weather_last = text + " "
-        weather_last += ("%.0f" % temp) + u"\u2103"
+        weather_last += ("%.0f" % temp) + u"\u00B0" + "C"
         weather_last_updated = now
     except Exception:
         traceback.print_exc(file=sys.stdout)

@@ -23,8 +23,8 @@ all: \
 test-mac:
 	python3 -m venv venv
 	source venv/bin/activate; \
-		pip3 -q install Pillow requests holidays feedparser PyYAML \
-			pyowm pygame ip2geotools astral tzlocal; \
+		pip3 -q install setuptools Pillow requests holidays feedparser \
+			PyYAML pyowm pygame astral tzlocal; \
 		python3 looper.py
 
 .PHONY: /usr/local/lib/looper

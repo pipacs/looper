@@ -6,7 +6,7 @@ import holidays
 import sys
 import traceback
 import urllib
-from ip2geotools.databases.noncommercial import DbIpCity
+import json
 
 
 settings = {}
@@ -26,9 +26,9 @@ def get_country_code():
         return country_last
 
     try:
-        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=2).read().strip()
-        response = DbIpCity.get(myIp, api_key='free')
-        country_last = response.country
+        location_json = urllib.request.urlopen('http://ipinfo.io/json', timeout=5).read()
+        location = json.loads(location_json)
+        country_last = location["country"]
     except:
         traceback.print_exc(file=sys.stdout)
 

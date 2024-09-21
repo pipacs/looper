@@ -1,11 +1,11 @@
 # Various utilities for Looper
 # Copyright (c) Akos Polster. All rights reserved.
 
-from ip2geotools.databases.noncommercial import DbIpCity
 import urllib
 import datetime
 import sys
 import traceback
+import json
 
 
 settings = {}
@@ -26,9 +26,13 @@ def get_current_location():
         return location_last
 
     try:
-        myIp = urllib.request.urlopen('http://icanhazip.com/', timeout=5).read().strip()
-        response = DbIpCity.get(myIp, api_key='free')
-        location_last = (response.latitude, response.longitude)
+        location_json = urllib.request.urlopen('http://ipinfo.io/json', timeout=5).read()
+        location = json.loads(location_json)
+        lat_lng = location["loc"].split(",")
+        lat = float(lat_lng[0])
+        lng = float(lat_lng[1])
+        # print("Location: " + str(location))
+        location_last = (lat, lng)
         settings["location_last"] = location_last
         settings["location_last_updated"] = now
     except:
